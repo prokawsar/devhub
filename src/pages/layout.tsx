@@ -1,5 +1,5 @@
 import { Toaster } from 'sonner'
-import { Outlet } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import AuthButton from '@/components/AuthButton'
 
 export function Layout() {
@@ -7,9 +7,12 @@ export function Layout() {
     <main className="h-[100svh] flex flex-col justify-between">
       <div className="flex flex-col h-full items-center bg-gray-50">
         <nav className="max-w-6xl border-b py-2 mx-auto w-full gap-2 flex flex-row justify-between">
-          <p className="text-center text-[26px] font-bold tracking-wide">
+          <Link
+            to="/"
+            className="text-center text-[26px] font-bold tracking-wide"
+          >
             DevHub
-          </p>
+          </Link>
           <AuthButton />
         </nav>
         <Outlet />
