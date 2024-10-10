@@ -16,11 +16,11 @@ export const signupSchema = z
     password: z
       .string()
       .min(8, { message: 'Password must contain at least 8 characters' })
-      .max(15, { message: 'Password maximum length is 15' })
-      .regex(
-        /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
-        'Password must contain mix of digits, letters and any special characters',
-      ),
+      .max(15, { message: 'Password maximum length is 15' }),
+    // .regex(
+    //   /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
+    //   'Password must contain mix of digits, letters and any special characters',
+    // ),
     confirm_password: z
       .string()
       .min(1, { message: 'Confirm password is required' }),
