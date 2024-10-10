@@ -1,14 +1,16 @@
 import ReactDOM from 'react-dom/client'
-import { StrictMode } from 'react'
+import { StrictMode, Suspense, lazy } from 'react'
 import './index.css'
 import App from './App'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Login from './pages/login'
-import Dashboard from './pages/dashboard/page'
-import Signup from './pages/signup'
-import Preview from './pages/preview/page'
 import AuthProvider from './components/context/AuthProvider'
 import { Layout } from './pages/layout'
+import Error from './pages/error'
+
+const Signup = lazy(() => import('./pages/signup'))
+const Login = lazy(() => import('./pages/login'))
+const Dashboard = lazy(() => import('./pages/dashboard/page'))
+const Preview = lazy(() => import('./pages/preview/page'))
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
@@ -16,6 +18,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
+    errorElement: <Error />,
     children: [
       {
         index: true,
@@ -25,7 +28,9 @@ const router = createBrowserRouter([
         path: 'login',
         element: (
           <AuthProvider>
-            <Login />
+            <Suspense fallback={<div>Loading...</div>}>
+              <Login />
+            </Suspense>
           </AuthProvider>
         ),
       },
@@ -33,7 +38,9 @@ const router = createBrowserRouter([
         path: 'signup',
         element: (
           <AuthProvider>
-            <Signup />
+            <Suspense fallback={<div>Loading...</div>}>
+              <Signup />
+            </Suspense>
           </AuthProvider>
         ),
       },
@@ -41,7 +48,9 @@ const router = createBrowserRouter([
         path: '/dashboard',
         element: (
           <AuthProvider>
-            <Dashboard />
+            <Suspense fallback={<div>Loading...</div>}>
+              <Dashboard />
+            </Suspense>
           </AuthProvider>
         ),
       },
@@ -49,7 +58,9 @@ const router = createBrowserRouter([
         path: '/preview',
         element: (
           <AuthProvider>
-            <Preview />
+            <Suspense fallback={<div>Loading...</div>}>
+              <Preview />
+            </Suspense>
           </AuthProvider>
         ),
       },
