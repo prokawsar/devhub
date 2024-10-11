@@ -1,5 +1,11 @@
 import { z } from 'zod'
 
+export type Link = {
+  id: number
+  name: string
+  link: string
+}
+
 export const loginSchema = z.object({
   email: z.string().min(1, { message: 'Email is required' }).email(),
   password: z

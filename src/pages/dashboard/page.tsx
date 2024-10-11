@@ -3,9 +3,11 @@ import Header from '@/components/Header'
 import ProfileDetails from '@/components/ProfileDetails'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { Link } from '@/utils/types'
 
 export default function Dashboard() {
   const [activeSection, setActiveSection] = useState('links')
+  const [links, setLinks] = useState<Link[]>([])
 
   const handleSection = (section: string) => {
     setActiveSection(section)
@@ -38,7 +40,7 @@ export default function Dashboard() {
         </div>
         <div className="flex flex-col gap-4 bg-white rounded-lg p-4 w-4/6">
           {activeSection === 'links' ? (
-            <CustomizeLinks />
+            <CustomizeLinks links={links} setLinks={setLinks} />
           ) : (
             <ProfileDetails
               register={register}
