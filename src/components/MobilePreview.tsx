@@ -17,12 +17,25 @@ export default function MobilePreview({
 
   return (
     <div className="flex flex-col gap-4 items-center h-full justify-center">
-      <div className="flex flex-col gap-3 border border-gray-600 rounded-3xl p-8 w-[300px]">
+      <div className="flex flex-col gap-3 border items-center border-gray-600 rounded-3xl p-8 w-[300px]">
+        {profileDetails.photo ? (
+          <img
+            src={profileDetails.photo}
+            alt="profile"
+            className="rounded-full w-24 h-24 border-4 border-primary"
+          />
+        ) : (
+          <div className="rounded-full w-24 h-24 bg-gray-200 border-4 border-primary"></div>
+        )}
         <div className="flex flex-col gap-1 font-bold text-xl w-full items-center mb-10">
-          <div className="flex flex-row gap-1">
-            <p>{profileDetails.firstName}</p>
-            <p>{profileDetails.lastName}</p>
-          </div>
+          {profileDetails.firstName || profileDetails.lastName ? (
+            <div className="flex flex-row gap-1">
+              <p>{profileDetails.firstName}</p>
+              <p>{profileDetails.lastName}</p>
+            </div>
+          ) : (
+            <div className="w-24 h-8 bg-gray-300"></div>
+          )}
 
           <p className="text-gray-500 text-sm">{profileDetails.email}</p>
         </div>

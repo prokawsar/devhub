@@ -17,6 +17,7 @@ export type ProfileData = {
   firstName: string
   lastName: string
   email: string
+  photo: string | null
 }
 
 export const loginSchema = z.object({

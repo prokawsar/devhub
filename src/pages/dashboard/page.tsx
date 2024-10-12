@@ -20,7 +20,7 @@ export default function Dashboard() {
   const [profileDetails, setProfileDetails] = useState({
     firstName: '',
     lastName: '',
-    photo: '',
+    photo: null,
     email: userData?.email || '',
   })
   const {

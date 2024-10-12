@@ -6,7 +6,7 @@ import {
 } from 'react-hook-form'
 import Input from './Input'
 import { ProfileData } from '@/utils/types'
-
+import { useCallback } from 'react'
 type ProfileDetailsProps = {
   register: UseFormRegister<ProfileData>
   errors: FieldErrors<ProfileData>
@@ -26,17 +26,20 @@ export default function ProfileDetails({
   onProfileUpdate,
   profileDetails,
 }: ProfileDetailsProps) {
-  const { userData } = useUserStore()
-
-  const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newPhoto = event.target.files![0]
-
-    const reader = new FileReader()
-    reader.readAsDataURL(newPhoto)
-    reader.onloadend = () => {
-      // updatePhoto(reader.result as string);
-    }
-  }
+  const handlePhotoChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const file = event.target.files?.[0]
+      if (file) {
+        const reader = new FileReader()
+        reader.onloadend = () => {
+          const imageData = reader.result as string
+          onProfileUpdate('photo', imageData)
+        }
+        reader.readAsDataURL(file)
+      }
+    },
+    [onProfileUpdate],
+  )
 
   return (
     <div className="w-full border-solid border-gray-300 bg-white p-10 pb-0">
@@ -58,10 +61,23 @@ export default function ProfileDetails({
           />
           <div className="flex-row flex items-center gap-5">
             <label
+              style={
+                profileDetails.photo
+                  ? { backgroundImage: `url(${profileDetails.photo})` }
+                  : {}
+              }
               htmlFor="image"
-              className={`flex w-56 cursor-pointer flex-col items-center gap-2 rounded-lg bg-primary-hover bg-cover bg-center px-5 py-10`}
+              className={`relative flex w-56 cursor-pointer flex-col items-center gap-2 rounded-lg bg-primary-hover bg-cover bg-center px-5 py-10`}
             >
-              <span className="text-xl font-semibold">+ Upload Image</span>
+              {profileDetails.photo ? (
+                <div className="absolute inset-0 w-56 px-5 rounded-lg bg-black bg-opacity-50 flex items-center justify-center">
+                  <span className="text-xl font-semibold text-white ">
+                    Change Image
+                  </span>
+                </div>
+              ) : (
+                <span className="text-xl font-semibold">+ Upload Image</span>
+              )}
             </label>
             <p className="w-36 text-gray-500">
               Image must be below 1024x1024px. Use PNG or JPG format.
