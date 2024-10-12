@@ -32,7 +32,6 @@ export function Layout() {
             },
             token: {
               colorPrimary: '#633cff',
-              colorPrimaryHover: '#efebff',
             },
           }}
         >
