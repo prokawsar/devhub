@@ -1,22 +1,18 @@
 import { useUserStore } from '@/store'
-import { Button } from 'antd'
 import {
   FieldErrors,
   UseFormHandleSubmit,
   UseFormRegister,
 } from 'react-hook-form'
 import Input from './Input'
+import { ProfileData } from '@/utils/types'
 
-type FormData = {
-  firstName: string
-  lastName: string
-}
 type ProfileDetailsProps = {
-  register: UseFormRegister<FormData>
-  errors: FieldErrors<FormData>
-  handleSubmit: UseFormHandleSubmit<FormData>
+  register: UseFormRegister<ProfileData>
+  errors: FieldErrors<ProfileData>
+  handleSubmit: UseFormHandleSubmit<ProfileData>
   isUpdating: boolean
-  onSubmitData: (data: FormData) => void
+  onSubmitData: (data: ProfileData) => void
 }
 
 export default function ProfileDetails({
@@ -94,20 +90,15 @@ export default function ProfileDetails({
             label="Email"
             placeholder="e.g. email@example.com"
             register={register}
-            disabled={true}
             type="email"
+            disabled={true}
             value={userData?.email}
           />
         </div>
         <div className="flex justify-end">
-          <Button
-            className="text-xl"
-            size="large"
-            type="primary"
-            htmlType="submit"
-          >
+          <button className="bg-primary hover:bg-primary-hover hover:text-primary border border-primary text-white px-7 py-3 rounded-xl">
             Save
-          </Button>
+          </button>
         </div>
       </form>
     </div>

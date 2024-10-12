@@ -6,6 +6,12 @@ export type Link = {
   link: string
 }
 
+export type ProfileData = {
+  firstName: string
+  lastName: string
+  email: string
+}
+
 export const loginSchema = z.object({
   email: z.string().min(1, { message: 'Email is required' }).email(),
   password: z

@@ -3,7 +3,7 @@ import Header from '@/components/Header'
 import ProfileDetails from '@/components/ProfileDetails'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link } from '@/utils/types'
+import { Link, ProfileData } from '@/utils/types'
 import MobilePreview from '@/components/MobilePreview'
 export default function Dashboard() {
   const [activeSection, setActiveSection] = useState('links')
@@ -23,12 +23,9 @@ export default function Dashboard() {
     register,
     handleSubmit,
     formState: { isSubmitting, errors },
-  } = useForm<{
-    firstName: string
-    lastName: string
-  }>()
+  } = useForm<ProfileData>()
 
-  const handleSubmitData = (data: { firstName: string; lastName: string }) => {
+  const handleSubmitData = (data: ProfileData) => {
     console.log(data)
   }
   return (
