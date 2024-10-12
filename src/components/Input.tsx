@@ -38,9 +38,9 @@ export default function Input({
           type={type}
           placeholder={placeholder}
           id={id}
-          className={`w-full rounded-lg border border-solid bg-white p-2 text-xl leading-[2.4rem] text-gray-800 outline-none focus:shadow-purple-sh disabled:cursor-not-allowed disabled:bg-disabled-bg ${
+          className={`w-full rounded-lg border border-solid bg-white p-2 text-xl text-gray-800 outline-none focus:shadow-purple-sh disabled:cursor-not-allowed disabled:bg-disabled-bg ${
             error
-              ? 'border-[#ff3939]'
+              ? 'border-red-500'
               : 'border-gray-300 caret-primary focus:border-primary'
           }`}
           {...register(id, {

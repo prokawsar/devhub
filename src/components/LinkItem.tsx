@@ -42,16 +42,16 @@ export default function LinkItem({
 
   return (
     <div
-      className="mb-5 rounded-lg bg-[#fafafa] p-8"
+      className="mb-5 rounded-lg bg-gray-50 p-8"
       ref={setNodeRef}
       style={style}
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <h3 className="font-bold text-[#737373]">Link #{link.id}</h3>
+          <h3 className="font-bold text-gray-500">Link #{link.id}</h3>
         </div>
         <p
-          className="cursor-pointer text-[#737373]"
+          className="cursor-pointer text-gray-500 hover:text-yellow-500 hover:underline"
           onClick={() => handleRemoveLink()}
         >
           Remove
@@ -60,21 +60,21 @@ export default function LinkItem({
 
       <form className="relative flex flex-col gap-[1.2rem] pt-5">
         <div>
-          <label htmlFor="platform" className="text-[#333]">
+          <label htmlFor="platform" className="text-gray-800">
             Platform
           </label>
 
           <div className="">
             <button
               type="button"
-              className="z-[999] flex w-full items-center rounded-lg border border-solid border-[#d9d9d9] bg-white h-10 px-4 text-[#333] caret-[#633cff] outline-none focus:border-[#633cff] focus:shadow-purple-sh"
+              className="z-[999] flex w-full items-center rounded-lg border border-solid border-gray-300 bg-white h-10 px-4 text-gray-800 caret-primary outline-none focus:border-primary focus:shadow-purple-sh"
               onClick={handlePlatformChange}
             >
               <p>{link.name}</p>
             </button>
 
             {isLinkBoxOpen && (
-              <div className="absolute top-20 z-[3] flex  h-40 w-full flex-col overflow-y-scroll border border-solid border-[#d9d9d9] bg-white shadow-dark-sh">
+              <div className="absolute top-20 z-[3] flex  h-40 w-full flex-col overflow-y-scroll border border-solid border-gray-300 bg-white shadow-dark-sh">
                 <div className="flex flex-col">
                   {socialPlatforms.map((platform) => (
                     <div
@@ -95,7 +95,7 @@ export default function LinkItem({
         </div>
 
         <div>
-          <label htmlFor="link" className="text-[#333]">
+          <label htmlFor="link" className="text-gray-800">
             Link
           </label>
           <div className="relative flex">
@@ -106,7 +106,7 @@ export default function LinkItem({
               value={linkUrl}
               onChange={(e) => setLinkUrl(e.target.value)}
               onBlur={() => handleUpdateLink({ url: linkUrl })}
-              className="w-full rounded-lg border py-2 px-4 border-solid border-[#d9d9d9] bg-white text-[#333] caret-[#633cff] outline-none focus:border-[#633cff] focus:shadow-purple-sh disabled:cursor-not-allowed disabled:bg-[#ccc]"
+              className="w-full rounded-lg border py-2 px-4 border-solid border-gray-300 bg-white text-gray-800 caret-primary outline-none focus:border-primary focus:shadow-purple-sh disabled:cursor-not-allowed disabled:bg-disabled-bg"
             />
           </div>
         </div>
