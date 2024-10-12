@@ -45,7 +45,7 @@ export default function CustomizeLinks({
       <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
         {links.length > 0 ? (
           <SortableContext items={links} strategy={verticalListSortingStrategy}>
-            <div className="flex flex-col overflow-y-auto min-h-96 max-h-[600px]">
+            <div className="flex flex-col overflow-y-auto max-h-[600px]">
               {links.map((link) => (
                 <LinkItem
                   key={makeid(6)}

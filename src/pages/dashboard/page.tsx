@@ -37,11 +37,11 @@ export default function Dashboard() {
   return (
     <div className="flex flex-col gap-4 h-full items-center max-w-7xl mx-auto w-full py-5">
       <Header handleSection={handleSection} activeSection={activeSection} />
-      <div className="flex flex-row gap-4 w-full">
+      <div className="flex flex-row gap-4 h-full w-full">
         <div className="flex flex-col gap-4 bg-white rounded-lg p-4 w-2/6">
           <MobilePreview links={links} profileDetails={profileDetails} />
         </div>
-        <div className="flex flex-col gap-4 bg-white rounded-lg p-4 w-4/6">
+        <div className="flex flex-col gap-4 h-full bg-white rounded-lg p-4 w-4/6">
           {activeSection === 'links' ? (
             <CustomizeLinks links={links} setLinks={setLinks} />
           ) : (
