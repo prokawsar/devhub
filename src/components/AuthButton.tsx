@@ -1,6 +1,7 @@
 import { supabase } from '@/utils/supabase'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useUserStore } from '@/store/index'
+import { Icon } from '@iconify/react'
 
 export default function AuthButton() {
   const { pathname } = useLocation()
@@ -15,8 +16,9 @@ export default function AuthButton() {
 
   if (userData?.id) {
     return (
-      <div className="flex items-center gap-4">
-        Hey, {userData.email}!<button onClick={signOut}>Logout</button>
+      <div className="flex text-gray-500 flex-row items-center gap-2">
+        <Icon icon="websymbol:logout" />
+        <button onClick={signOut}>Sign out</button>
       </div>
     )
   }
