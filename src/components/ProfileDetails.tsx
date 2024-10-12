@@ -26,20 +26,17 @@ export default function ProfileDetails({
   onProfileUpdate,
   profileDetails,
 }: ProfileDetailsProps) {
-  const handlePhotoChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const file = event.target.files?.[0]
-      if (file) {
-        const reader = new FileReader()
-        reader.onloadend = () => {
-          const imageData = reader.result as string
-          onProfileUpdate('photo', imageData)
-        }
-        reader.readAsDataURL(file)
+  const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        const imageData = reader.result as string
+        onProfileUpdate('photo', imageData)
       }
-    },
-    [onProfileUpdate],
-  )
+      reader.readAsDataURL(file)
+    }
+  }
 
   return (
     <div className="w-full border-solid border-gray-300 bg-white p-10 pb-0">
