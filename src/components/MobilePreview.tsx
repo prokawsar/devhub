@@ -34,7 +34,7 @@ export default function MobilePreview({
           >
             {link ? (
               <RouterLink
-                className="rounded-lg p-4 w-full flex items-center justify-between hover:bg-opacity-50  cursor-pointer"
+                className="rounded-lg px-4 py-3 w-full flex items-center justify-between hover:bg-opacity-50  cursor-pointer"
                 to={link.link}
                 style={{
                   backgroundColor: link.platform.color,

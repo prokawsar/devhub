@@ -37,6 +37,7 @@ export default function CustomizeLinks({
       </h3>
       <button
         onClick={() => addLinks()}
+        disabled={links.length >= 5}
         className="mb-10 flex items-center justify-center rounded-xl border border-solid border-primary py-3 text-xl font-medium text-primary hover:bg-primary-hover disabled:cursor-not-allowed disabled:border-disabled-bg disabled:bg-disabled-bg disabled:text-disabled-text"
       >
         <span>Add link</span>
@@ -45,7 +46,7 @@ export default function CustomizeLinks({
       <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
         {links.length > 0 ? (
           <SortableContext items={links} strategy={verticalListSortingStrategy}>
-            <div className="flex flex-col overflow-y-auto h-[60%]">
+            <div className="flex flex-col overflow-y-auto h-[600px]">
               {links.map((link) => (
                 <LinkItem
                   key={makeid(6)}

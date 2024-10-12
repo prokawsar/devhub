@@ -9,7 +9,7 @@ export function Layout() {
   const { userData } = useContext(AuthContext)
 
   return (
-    <main className="h-[100svh] flex flex-col justify-between">
+    <main className="flex flex-col justify-between">
       <div className="flex flex-col h-full items-center bg-gray-50">
         {!userData && (
           <nav className="max-w-6xl border-b py-2 mx-auto w-full gap-2 flex flex-row justify-between">
