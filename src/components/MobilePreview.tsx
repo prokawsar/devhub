@@ -2,13 +2,14 @@ import { Link } from '@/utils/types'
 import { ProfileData } from '@/utils/types'
 import { Link as RouterLink } from 'react-router-dom'
 import { isLightColor } from '@/utils/constants'
+import { Icon } from '@iconify/react'
 
 export default function MobilePreview({
   links,
   profileDetails,
 }: {
   links: Link[]
-  profileDetails: Omit<ProfileData, 'email'>
+  profileDetails: ProfileData
 }) {
   const displayLinks = Array(5)
     .fill(null)
@@ -16,11 +17,16 @@ export default function MobilePreview({
 
   return (
     <div className="flex flex-col gap-4 items-center h-full justify-center">
-      <div className="flex flex-col gap-1 border border-gray-600 rounded-xl p-2 w-[300px]">
-        <div className="flex flex-row gap-1 font-bold justify-center">
-          <p>{profileDetails.firstName}</p>
-          <p>{profileDetails.lastName}</p>
+      <div className="flex flex-col gap-3 border border-gray-600 rounded-3xl p-8 w-[300px]">
+        <div className="flex flex-col gap-1 font-bold text-xl w-full items-center mb-10">
+          <div className="flex flex-row gap-1">
+            <p>{profileDetails.firstName}</p>
+            <p>{profileDetails.lastName}</p>
+          </div>
+
+          <p className="text-gray-500 text-sm">{profileDetails.email}</p>
         </div>
+
         {displayLinks.map((link, index) => (
           <div
             key={link?.id || `placeholder-${index}`}
@@ -35,7 +41,11 @@ export default function MobilePreview({
                   color: isLightColor(link.platform.color) ? '#000' : '#fff',
                 }}
               >
-                {link.platform.name}
+                <span className="flex flex-row gap-2 items-center">
+                  <Icon icon={link.platform.icon} />
+                  {link.platform.name}
+                </span>
+                <Icon icon="material-symbols:arrow-forward-rounded" />
               </RouterLink>
             ) : (
               <div className="rounded-lg p-6 w-full flex items-center justify-between bg-gray-200 text-gray-400"></div>

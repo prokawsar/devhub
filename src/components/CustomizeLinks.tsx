@@ -29,7 +29,7 @@ export default function CustomizeLinks({
     ])
   }
   return (
-    <div className="flex flex-col bg-white p-10 pb-0 w-full">
+    <div className="flex flex-col bg-white p-10 pb-0 w-full h-full">
       <h1 className="text-3xl font-bold text-gray-800">Customize your links</h1>
       <h3 className="text-xl my-5 text-gray-500">
         Add/edit/remove links below and then share all your profiles with the
@@ -45,7 +45,7 @@ export default function CustomizeLinks({
       <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
         {links.length > 0 ? (
           <SortableContext items={links} strategy={verticalListSortingStrategy}>
-            <div className="flex flex-col overflow-y-auto max-h-[600px]">
+            <div className="flex flex-col overflow-y-auto h-[60%]">
               {links.map((link) => (
                 <LinkItem
                   key={makeid(6)}

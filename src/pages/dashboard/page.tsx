@@ -5,6 +5,8 @@ import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, ProfileData } from '@/utils/types'
 import MobilePreview from '@/components/MobilePreview'
+import { useUserStore } from '@/store'
+
 export default function Dashboard() {
   const [activeSection, setActiveSection] = useState('links')
   const [links, setLinks] = useState<Link[]>([])
@@ -13,11 +15,13 @@ export default function Dashboard() {
     setActiveSection(section)
   }
 
-  // TODO: add profile details
+  const { userData } = useUserStore()
+
   const [profileDetails, setProfileDetails] = useState({
     firstName: '',
     lastName: '',
     photo: '',
+    email: userData?.email || '',
   })
   const {
     register,
@@ -51,8 +55,7 @@ export default function Dashboard() {
               handleSubmit={handleSubmit}
               isUpdating={isSubmitting}
               onSubmitData={handleSubmitData}
-              firstName={profileDetails.firstName}
-              lastName={profileDetails.lastName}
+              profileDetails={profileDetails}
               onProfileUpdate={handleProfileUpdate}
             />
           )}

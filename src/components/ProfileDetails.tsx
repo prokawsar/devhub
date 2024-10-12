@@ -13,8 +13,7 @@ type ProfileDetailsProps = {
   handleSubmit: UseFormHandleSubmit<ProfileData>
   isUpdating: boolean
   onSubmitData: (data: ProfileData) => void
-  firstName: string
-  lastName: string
+  profileDetails: ProfileData
   onProfileUpdate: (field: keyof ProfileData, value: string) => void
 }
 
@@ -25,8 +24,7 @@ export default function ProfileDetails({
   isUpdating,
   onSubmitData,
   onProfileUpdate,
-  firstName,
-  lastName,
+  profileDetails,
 }: ProfileDetailsProps) {
   const { userData } = useUserStore()
 
@@ -80,7 +78,7 @@ export default function ProfileDetails({
             disabled={isUpdating}
             required
             minLength={3}
-            value={firstName}
+            value={profileDetails.firstName}
             onChange={(e) => onProfileUpdate('firstName', e.target.value)}
           />
           <Input
@@ -92,7 +90,7 @@ export default function ProfileDetails({
             disabled={isUpdating}
             required
             minLength={3}
-            value={lastName}
+            value={profileDetails.lastName}
             onChange={(e) => onProfileUpdate('lastName', e.target.value)}
           />
           <Input
@@ -102,7 +100,7 @@ export default function ProfileDetails({
             register={register}
             type="email"
             disabled={true}
-            value={userData?.email}
+            value={profileDetails.email}
           />
         </div>
         <div className="flex justify-end">
