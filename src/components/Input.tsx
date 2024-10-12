@@ -3,40 +3,25 @@ import { UseFormRegister, FieldError } from 'react-hook-form'
 type InputProps = {
   id: string
   label: string
-  placeholder: string
   register: UseFormRegister<any>
   error?: FieldError
-  disabled?: boolean
-  type?: string
-  required?: boolean
-  minLength?: number
-  value?: string
-  readonly?: boolean
-}
+} & React.InputHTMLAttributes<HTMLInputElement>
 
 export default function Input({
   id,
   label,
-  placeholder,
   register,
   error,
-  disabled = false,
-  type = 'text',
-  required = false,
-  minLength,
-  value,
-  readonly = false,
+  ...rest
 }: InputProps) {
   return (
     <div className="flex-row flex items-center gap-5">
       <label htmlFor={id} className="w-[24rem] text-gray-500">
         {label}
-        {required && '*'}
+        {rest.required && '*'}
       </label>
       <div className="relative flex w-full">
         <input
-          type={type}
-          placeholder={placeholder}
           id={id}
           className={`w-full rounded-lg border border-solid bg-white p-2 text-xl text-gray-800 outline-none focus:shadow-purple-sh disabled:cursor-not-allowed disabled:bg-disabled-bg ${
             error
@@ -44,17 +29,15 @@ export default function Input({
               : 'border-gray-300 caret-primary focus:border-primary'
           }`}
           {...register(id, {
-            required: required ? 'Can’t be empty' : false,
-            minLength: minLength
+            required: rest.required ? 'Can’t be empty' : false,
+            minLength: rest.minLength
               ? {
-                  value: minLength,
-                  message: `Must be at least ${minLength} characters`,
+                  value: rest.minLength,
+                  message: `Must be at least ${rest.minLength} characters`,
                 }
               : undefined,
           })}
-          disabled={disabled}
-          value={value}
-          readOnly={readonly}
+          {...rest}
         />
         {error && (
           <p className="absolute right-[2.5%] top-[40%] text-sm text-red-500">

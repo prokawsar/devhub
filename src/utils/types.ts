@@ -1,8 +1,15 @@
 import { z } from 'zod'
 
+export type SocialPlatform = {
+  name: string
+  icon: string
+  url: string
+  color: string
+}
+
 export type Link = {
   id: number
-  name: string
+  platform: SocialPlatform
   link: string
 }
 

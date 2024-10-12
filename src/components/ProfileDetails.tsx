@@ -13,6 +13,9 @@ type ProfileDetailsProps = {
   handleSubmit: UseFormHandleSubmit<ProfileData>
   isUpdating: boolean
   onSubmitData: (data: ProfileData) => void
+  firstName: string
+  lastName: string
+  onProfileUpdate: (field: keyof ProfileData, value: string) => void
 }
 
 export default function ProfileDetails({
@@ -21,6 +24,9 @@ export default function ProfileDetails({
   handleSubmit,
   isUpdating,
   onSubmitData,
+  onProfileUpdate,
+  firstName,
+  lastName,
 }: ProfileDetailsProps) {
   const { userData } = useUserStore()
 
@@ -74,6 +80,8 @@ export default function ProfileDetails({
             disabled={isUpdating}
             required
             minLength={3}
+            value={firstName}
+            onChange={(e) => onProfileUpdate('firstName', e.target.value)}
           />
           <Input
             id="lastName"
@@ -84,6 +92,8 @@ export default function ProfileDetails({
             disabled={isUpdating}
             required
             minLength={3}
+            value={lastName}
+            onChange={(e) => onProfileUpdate('lastName', e.target.value)}
           />
           <Input
             id="email"

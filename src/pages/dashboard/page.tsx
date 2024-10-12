@@ -1,7 +1,7 @@
 import CustomizeLinks from '@/components/CustomizeLinks'
 import Header from '@/components/Header'
 import ProfileDetails from '@/components/ProfileDetails'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, ProfileData } from '@/utils/types'
 import MobilePreview from '@/components/MobilePreview'
@@ -28,12 +28,18 @@ export default function Dashboard() {
   const handleSubmitData = (data: ProfileData) => {
     console.log(data)
   }
+  const handleProfileUpdate = useCallback((field: string, value: string) => {
+    setProfileDetails((prevDetails) => ({
+      ...prevDetails,
+      [field]: value,
+    }))
+  }, [])
   return (
     <div className="flex flex-col gap-4 h-full items-center max-w-7xl mx-auto w-full py-5">
       <Header handleSection={handleSection} activeSection={activeSection} />
       <div className="flex flex-row gap-4 w-full">
         <div className="flex flex-col gap-4 bg-white rounded-lg p-4 w-2/6">
-          <MobilePreview links={links} />
+          <MobilePreview links={links} profileDetails={profileDetails} />
         </div>
         <div className="flex flex-col gap-4 bg-white rounded-lg p-4 w-4/6">
           {activeSection === 'links' ? (
@@ -45,6 +51,9 @@ export default function Dashboard() {
               handleSubmit={handleSubmit}
               isUpdating={isSubmitting}
               onSubmitData={handleSubmitData}
+              firstName={profileDetails.firstName}
+              lastName={profileDetails.lastName}
+              onProfileUpdate={handleProfileUpdate}
             />
           )}
         </div>

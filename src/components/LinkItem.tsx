@@ -4,7 +4,7 @@ import { CSS } from '@dnd-kit/utilities'
 import { useDraggable } from '@dnd-kit/core'
 import { Icon } from '@iconify/react'
 import { socialPlatforms } from '../utils/constants'
-import { Link } from '../utils/types'
+import { Link, SocialPlatform } from '../utils/types'
 
 export default function LinkItem({
   link,
@@ -17,7 +17,7 @@ export default function LinkItem({
     platform,
     url,
   }: {
-    platform?: string
+    platform?: SocialPlatform
     url?: string
   }) => void
 }) {
@@ -70,7 +70,7 @@ export default function LinkItem({
               className="z-[999] flex w-full items-center rounded-lg border border-solid border-gray-300 bg-white h-10 px-4 text-gray-800 caret-primary outline-none focus:border-primary focus:shadow-purple-sh"
               onClick={handlePlatformChange}
             >
-              <p>{link.name}</p>
+              <p>{link.platform.name}</p>
             </button>
 
             {isLinkBoxOpen && (
@@ -78,9 +78,7 @@ export default function LinkItem({
                 <div className="flex flex-col">
                   {socialPlatforms.map((platform) => (
                     <div
-                      onClick={() =>
-                        handleUpdateLink({ platform: platform.name })
-                      }
+                      onClick={() => handleUpdateLink({ platform: platform })}
                       className="flex flex-row gap-2 items-center hover:bg-gray-50 px-3 py-2 border-b cursor-pointer"
                       key={platform.name}
                     >

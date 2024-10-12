@@ -6,9 +6,9 @@ import {
 } from '@dnd-kit/sortable'
 import EmptyList from './EmptyList'
 import LinkItem from './LinkItem'
-import { makeid } from '@/utils/constants'
+import { makeid, socialPlatforms } from '@/utils/constants'
 import { Button } from 'antd'
-import { Link } from '@/utils/types'
+import type { Link, SocialPlatform } from '@/utils/types'
 
 export default function CustomizeLinks({
   links,
@@ -23,7 +23,10 @@ export default function CustomizeLinks({
   }
 
   function addLinks() {
-    setLinks([...links, { id: links.length + 1, name: '', link: '' }])
+    setLinks([
+      ...links,
+      { id: links.length + 1, platform: socialPlatforms[0], link: '' },
+    ])
   }
   return (
     <div className="flex flex-col bg-white p-10 pb-0 w-full">
@@ -50,14 +53,20 @@ export default function CustomizeLinks({
                   handleRemoveLink={() => {
                     setLinks(links.filter((l) => l.id !== link.id))
                   }}
-                  handleUpdateLink={({ platform, url }) => {
+                  handleUpdateLink={({
+                    platform,
+                    url,
+                  }: {
+                    platform?: SocialPlatform
+                    url?: string
+                  }) => {
                     setLinks(
                       links.map((l) => {
                         if (l.id === link.id) {
                           return {
                             ...l,
-                            name: platform || l.name,
-                            link: url || '',
+                            platform: platform || l.platform,
+                            link: url || l.link,
                           }
                         }
                         return l
