@@ -16,7 +16,7 @@ export default function AuthButton() {
 
   if (userData?.id) {
     return (
-      <div className="flex text-gray-500 flex-row items-center gap-2">
+      <div className="flex text-gray-500 flex-row hover:text-primary items-center gap-2">
         <Icon icon="websymbol:logout" />
         <button onClick={signOut}>Sign out</button>
       </div>

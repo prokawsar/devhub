@@ -27,14 +27,14 @@ export default function CustomizeLinks({
   }
   return (
     <div className="flex flex-col bg-white p-10 pb-0 w-full">
-      <h1 className="text-3xl font-bold text-[#333]">Customize your links</h1>
-      <h3 className="text-xl my-5 text-[#737373]">
+      <h1 className="text-3xl font-bold text-gray-800">Customize your links</h1>
+      <h3 className="text-xl my-5 text-gray-500">
         Add/edit/remove links below and then share all your profiles with the
         world!
       </h3>
       <button
         onClick={() => addLinks()}
-        className="mb-10 flex items-center justify-center rounded-xl border border-solid border-[#633cff] py-3 text-xl font-medium text-[#633cff] hover:bg-[#efebff] disabled:cursor-not-allowed disabled:border-[#ccc] disabled:bg-[#ccc] disabled:text-[#666]"
+        className="mb-10 flex items-center justify-center rounded-xl border border-solid border-primary py-3 text-xl font-medium text-primary hover:bg-primary-hover disabled:cursor-not-allowed disabled:border-disabled-bg disabled:bg-disabled-bg disabled:text-disabled-text"
       >
         <span>Add link</span>
       </button>
@@ -74,9 +74,9 @@ export default function CustomizeLinks({
       </DndContext>
       {links.length > 0 && (
         <div className="mt-10 flex items-center justify-end">
-          <Button type="primary" size="large">
+          <button className="bg-primary hover:bg-primary-hover hover:text-primary border border-primary text-white px-7 py-3 rounded-xl">
             Save
-          </Button>
+          </button>
         </div>
       )}
     </div>

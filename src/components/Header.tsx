@@ -27,7 +27,7 @@ export default function Header({
           onClick={() => handleSection('links')}
           type="text"
           size="large"
-          className={`flex items-center rounded-xl px-4 py-7 text-xl font-semibold hover:text-[#633cff] ${activeSection === 'links' ? 'bg-[#efebff] text-[#633cff]' : 'text-[#737373]'}`}
+          className={`flex items-center rounded-xl px-4 py-7 text-xl font-semibold hover:text-primary ${activeSection === 'links' ? 'bg-primary-hover text-primary' : 'text-gray-500'}`}
         >
           <p className="">Links</p>
         </Button>
@@ -35,7 +35,7 @@ export default function Header({
           onClick={() => handleSection('profile')}
           type="text"
           size="large"
-          className={`flex items-center rounded-xl px-4 py-7 text-xl font-semibold hover:text-[#633cff] ${activeSection === 'profile' ? 'bg-[#efebff] text-[#633cff]' : 'text-[#737373]'}`}
+          className={`flex items-center rounded-xl px-4 py-7 text-xl font-semibold hover:text-primary ${activeSection === 'profile' ? 'bg-primary-hover text-primary' : 'text-gray-500'}`}
         >
           <p className="">Profile Details</p>
         </Button>
@@ -44,7 +44,7 @@ export default function Header({
       <div className="flex items-center gap-4">
         <Link
           to={`/preview`}
-          className="rounded-xl border border-solid border-[#633cff] py-3 px-5 text-xl font-semibold text-[#633cff] transition-all duration-300 hover:bg-[#efebff]"
+          className="rounded-xl border border-solid border-primary py-3 px-5 text-xl font-semibold text-primary transition-all duration-300 hover:bg-primary-hover"
         >
           <span className="">Preview</span>
         </Link>

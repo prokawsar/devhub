@@ -29,7 +29,7 @@ export default function Input({
 }: InputProps) {
   return (
     <div className="flex-row flex items-center gap-5">
-      <label htmlFor={id} className="w-[24rem] text-[#737373]">
+      <label htmlFor={id} className="w-[24rem] text-gray-500">
         {label}
         {required && '*'}
       </label>
@@ -38,10 +38,10 @@ export default function Input({
           type={type}
           placeholder={placeholder}
           id={id}
-          className={`w-full rounded-lg border border-solid bg-white p-2 text-xl leading-[2.4rem] text-[#333] outline-none focus:shadow-purple-sh disabled:cursor-not-allowed disabled:bg-[#ccc] ${
+          className={`w-full rounded-lg border border-solid bg-white p-2 text-xl leading-[2.4rem] text-gray-800 outline-none focus:shadow-purple-sh disabled:cursor-not-allowed disabled:bg-disabled-bg ${
             error
               ? 'border-[#ff3939]'
-              : 'border-[#d9d9d9] caret-[#633cff] focus:border-[#633cff]'
+              : 'border-gray-300 caret-primary focus:border-primary'
           }`}
           {...register(id, {
             required: required ? 'Can’t be empty' : false,
@@ -57,7 +57,7 @@ export default function Input({
           readOnly={readonly}
         />
         {error && (
-          <p className="absolute right-[2.5%] top-[40%] text-sm text-[#ff3939]">
+          <p className="absolute right-[2.5%] top-[40%] text-sm text-red-500">
             {error.message}
           </p>
         )}

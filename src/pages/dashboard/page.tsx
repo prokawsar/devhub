@@ -4,7 +4,7 @@ import ProfileDetails from '@/components/ProfileDetails'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link } from '@/utils/types'
-
+import MobilePreview from '@/components/MobilePreview'
 export default function Dashboard() {
   const [activeSection, setActiveSection] = useState('links')
   const [links, setLinks] = useState<Link[]>([])
@@ -36,7 +36,7 @@ export default function Dashboard() {
       <Header handleSection={handleSection} activeSection={activeSection} />
       <div className="flex flex-row gap-4 w-full">
         <div className="flex flex-col gap-4 bg-white rounded-lg p-4 w-2/6">
-          <p>Mobile</p>
+          <MobilePreview links={links} />
         </div>
         <div className="flex flex-col gap-4 bg-white rounded-lg p-4 w-4/6">
           {activeSection === 'links' ? (

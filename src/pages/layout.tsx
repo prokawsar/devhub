@@ -3,6 +3,7 @@ import { Link, Outlet } from 'react-router-dom'
 import AuthButton from '@/components/AuthButton'
 import { useContext } from 'react'
 import { AuthContext } from '@/components/context/AuthProvider'
+import { ConfigProvider } from 'antd'
 
 export function Layout() {
   const { userData } = useContext(AuthContext)
@@ -21,7 +22,22 @@ export function Layout() {
             <AuthButton />
           </nav>
         )}
-        <Outlet />
+        <ConfigProvider
+          theme={{
+            components: {
+              Button: {
+                colorBgTextHover: '#efebff',
+                defaultHoverBg: '#7b62dc',
+              },
+            },
+            token: {
+              colorPrimary: '#633cff',
+              colorPrimaryHover: '#efebff',
+            },
+          }}
+        >
+          <Outlet />
+        </ConfigProvider>
       </div>
       <Toaster
         toastOptions={{
