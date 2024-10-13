@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { useDraggable } from '@dnd-kit/core'
 import { Icon } from '@iconify/react'
 import { socialPlatforms } from '../utils/constants'
 import { Link, SocialPlatform } from '../utils/types'
-
+import { MouseEvent } from 'react'
 export default function LinkItem({
   link,
   handleRemoveLink,
@@ -21,33 +20,41 @@ export default function LinkItem({
     url?: string
   }) => void
 }) {
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: link.id })
   const [isLinkBoxOpen, setIsLinkBoxOpen] = useState(false)
   const [linkUrl, setLinkUrl] = useState(link.link)
-
-  function handlePlatformChange(event: React.MouseEvent<HTMLButtonElement>) {
-    event.preventDefault()
-    event.stopPropagation()
-    setIsLinkBoxOpen((prev) => !prev)
-  }
-
-  const { id } = link
-  const { listeners, setNodeRef, transform, transition } = useSortable({ id })
-  const { attributes: draggableAttributes } = useDraggable({
-    id: `item-${id}`,
-  })
   const style = {
     transition,
     transform: CSS.Transform.toString(transform),
   }
 
+  function handlePlatformChange(event: MouseEvent<HTMLButtonElement>) {
+    event.preventDefault()
+    event.stopPropagation()
+    setIsLinkBoxOpen((prev) => !prev)
+  }
+
+  function handlePlatformSelect(platform: SocialPlatform) {
+    handleUpdateLink({ platform: platform })
+  }
+
+  useEffect(() => {
+    setIsLinkBoxOpen(false)
+  }, [link.platform])
+
   return (
     <div
-      className="mb-5 rounded-lg bg-gray-50 p-8"
+      className="mb-5 rounded-lg bg-gray-50 p-8 cursor-default"
       ref={setNodeRef}
       style={style}
+      {...attributes}
     >
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
+          <div {...listeners} className="cursor-move">
+            <Icon icon="mdi:drag" className="text-2xl text-gray-500" />
+          </div>
           <h3 className="font-bold text-gray-500">Link #{link.id}</h3>
         </div>
         <p
@@ -58,7 +65,7 @@ export default function LinkItem({
         </p>
       </div>
 
-      <form className="relative flex flex-col gap-[1.2rem] pt-5">
+      <div className="relative flex flex-col gap-4 pt-5">
         <div>
           <label htmlFor="platform" className="text-gray-800">
             Platform
@@ -74,11 +81,13 @@ export default function LinkItem({
             </button>
 
             {isLinkBoxOpen && (
-              <div className="absolute top-20 z-[3] flex  h-40 w-full flex-col overflow-y-scroll border border-solid border-gray-300 bg-white shadow-dark-sh">
+              <div className="absolute top-22 z-[3] flex  h-40 w-full flex-col overflow-y-scroll border border-solid border-gray-300 bg-white shadow-dark-sh">
                 <div className="flex flex-col">
                   {socialPlatforms.map((platform) => (
                     <div
-                      onClick={() => handleUpdateLink({ platform: platform })}
+                      onClick={() => {
+                        handlePlatformSelect(platform)
+                      }}
                       className="flex flex-row gap-2 items-center hover:bg-gray-50 px-3 py-2 border-b cursor-pointer"
                       key={platform.name}
                     >
@@ -108,7 +117,7 @@ export default function LinkItem({
             />
           </div>
         </div>
-      </form>
+      </div>
     </div>
   )
 }

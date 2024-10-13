@@ -13,13 +13,23 @@ import type { Link, SocialPlatform } from '@/utils/types'
 export default function CustomizeLinks({
   links,
   setLinks,
+  setMobilePreviewLinks,
 }: {
   links: Link[]
   setLinks: (links: Link[]) => void
+  setMobilePreviewLinks: (links: Link[]) => void
 }) {
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event
-    if (!over || active.id === over.id) return
+
+    if (over && active.id !== over.id) {
+      const oldIndex = links.findIndex((link) => link.id === active.id)
+      const newIndex = links.findIndex((link) => link.id === over.id)
+
+      const newLinks = arrayMove(links, oldIndex, newIndex)
+      setLinks(newLinks)
+      setMobilePreviewLinks(newLinks) // Update mobile preview
+    }
   }
 
   function addLinks() {
@@ -49,10 +59,12 @@ export default function CustomizeLinks({
             <div className="flex flex-col overflow-y-auto h-[600px]">
               {links.map((link) => (
                 <LinkItem
-                  key={makeid(6)}
+                  key={link.id}
                   link={link}
                   handleRemoveLink={() => {
-                    setLinks(links.filter((l) => l.id !== link.id))
+                    const newLinks = links.filter((l) => l.id !== link.id)
+                    setLinks(newLinks)
+                    setMobilePreviewLinks(newLinks) // Update mobile preview
                   }}
                   handleUpdateLink={({
                     platform,
@@ -73,6 +85,7 @@ export default function CustomizeLinks({
                         return l
                       }),
                     )
+                    setMobilePreviewLinks(links) // Update mobile preview
                   }}
                 />
               ))}

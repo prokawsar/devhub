@@ -6,7 +6,8 @@ import {
 } from 'react-hook-form'
 import Input from './Input'
 import { ProfileData } from '@/utils/types'
-import { useCallback } from 'react'
+import { ChangeEvent } from 'react'
+
 type ProfileDetailsProps = {
   register: UseFormRegister<ProfileData>
   errors: FieldErrors<ProfileData>
@@ -26,7 +27,7 @@ export default function ProfileDetails({
   onProfileUpdate,
   profileDetails,
 }: ProfileDetailsProps) {
-  const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePhotoChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (file) {
       const reader = new FileReader()

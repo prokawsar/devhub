@@ -2,18 +2,14 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { supabase } from '@/utils/supabase'
 import { User } from '@supabase/supabase-js'
 import { useUserStore } from '@/store/index'
-import { createContext, useEffect } from 'react'
+import { createContext, ReactNode, useEffect } from 'react'
 import { PROTECTED_ROUTES, PUBLIC_ROUTES } from '@/utils/constants'
 
 export const AuthContext = createContext<{ userData: User | null }>({
   userData: null,
 })
 
-export default function AuthProvider({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function AuthProvider({ children }: { children: ReactNode }) {
   const { userData, setUser } = useUserStore()
   const navigate = useNavigate()
   const location = useLocation()

@@ -1,11 +1,12 @@
 import { UseFormRegister, FieldError } from 'react-hook-form'
+import { InputHTMLAttributes } from 'react'
 
 type InputProps = {
   id: string
   label: string
   register: UseFormRegister<any>
   error?: FieldError
-} & React.InputHTMLAttributes<HTMLInputElement>
+} & InputHTMLAttributes<HTMLInputElement>
 
 export default function Input({
   id,
