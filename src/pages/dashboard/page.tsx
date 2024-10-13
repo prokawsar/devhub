@@ -45,7 +45,7 @@ export default function Dashboard() {
         <div className="flex flex-col gap-4 bg-white rounded-lg p-4 w-2/6">
           <MobilePreview links={links} profileDetails={profileDetails} />
         </div>
-        <div className="flex flex-col gap-4 h-[950px] bg-white rounded-lg p-4 w-4/6">
+        <div className="flex flex-col gap-4 bg-white rounded-lg p-4 w-4/6">
           {activeSection === 'links' ? (
             <CustomizeLinks links={links} setLinks={setLinks} />
           ) : (

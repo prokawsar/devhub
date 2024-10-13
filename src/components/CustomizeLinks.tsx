@@ -46,7 +46,7 @@ export default function CustomizeLinks({
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (validateLinks()) {
+    if (validateLinks() && links.length > 0) {
       // Proceed with form submission
       console.log('Form submitted successfully')
     }
@@ -72,10 +72,7 @@ export default function CustomizeLinks({
       >
         <span>Add link</span>
       </button>
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col bg-white p-10 pb-0 w-full h-full"
-      >
+      <form onSubmit={handleSubmit} className="flex flex-col bg-white w-full">
         <DndContext
           collisionDetection={closestCorners}
           onDragEnd={handleDragEnd}
@@ -123,13 +120,14 @@ export default function CustomizeLinks({
             <EmptyList />
           )}
         </DndContext>
-        {links.length > 0 && (
-          <div className="mt-10 flex items-center justify-end">
-            <button className="bg-primary hover:bg-primary-hover hover:text-primary border border-primary text-white px-7 py-3 rounded-xl">
-              Save
-            </button>
-          </div>
-        )}
+        <div className="mt-10 flex items-center justify-end border-t pt-5">
+          <button
+            disabled={links.length === 0}
+            className="bg-primary hover:bg-primary-hover hover:text-primary border border-primary text-white px-7 py-3 rounded-xl disabled:cursor-not-allowed disabled:bg-disabled-bg disabled:text-disabled-text"
+          >
+            Save
+          </button>
+        </div>
       </form>
     </div>
   )
