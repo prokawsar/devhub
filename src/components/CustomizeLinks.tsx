@@ -90,6 +90,9 @@ export default function CustomizeLinks({
                     errors={errors}
                     handleRemoveLink={() => {
                       const newLinks = links.filter((l) => l.id !== link.id)
+                      if (newLinks.length === 0) {
+                        setErrors({})
+                      }
                       setLinks(newLinks)
                     }}
                     handleUpdateLink={({

@@ -76,7 +76,7 @@ export default function LinkItem({
           <div className="">
             <button
               type="button"
-              className="z-[999] flex w-full items-center rounded-lg border border-solid border-gray-300 bg-white h-10 px-4 text-gray-800 caret-primary outline-none focus:border-primary focus:shadow-purple-sh"
+              className="z-[999] flex w-full items-center rounded-lg border-2 border-gray-300 bg-white h-10 px-4 text-gray-800 caret-primary outline-none focus:border-primary focus:shadow-purple-sh"
               onClick={handlePlatformChange}
             >
               <p>{link.platform.name}</p>
@@ -115,7 +115,9 @@ export default function LinkItem({
               value={linkUrl}
               onChange={(e) => setLinkUrl(e.target.value)}
               onBlur={() => handleUpdateLink({ url: linkUrl })}
-              className="w-full rounded-lg border py-2 px-4 border-solid border-gray-300 bg-white text-gray-800 caret-primary outline-none focus:border-primary focus:shadow-purple-sh disabled:cursor-not-allowed disabled:bg-disabled-bg"
+              className={`w-full rounded-lg border py-2 px-4 border-2 ${
+                errors && errors[link.id] ? 'border-red-500' : 'border-gray-300'
+              } bg-white text-gray-800 caret-primary outline-none focus:border-primary focus:shadow-purple-sh disabled:cursor-not-allowed`}
             />
             {errors && errors[link.id] && (
               <p className="text-red-500 text-sm">{errors[link.id]}</p>
