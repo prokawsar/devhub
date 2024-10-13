@@ -6,10 +6,12 @@ import {
 } from '@dnd-kit/sortable'
 import EmptyList from './EmptyList'
 import LinkItem from './LinkItem'
-import { isValidUrl, socialPlatforms } from '@/utils/constants'
+import { isValidUrl, makeid, socialPlatforms } from '@/utils/constants'
 import type { Link, SocialPlatform } from '@/utils/types'
 import { useState, FormEvent } from 'react'
 import { supabase } from '@/utils/supabase'
+import { useUserStore } from '@/store'
+import { toast } from 'sonner'
 
 export default function CustomizeLinks({
   links,
@@ -19,6 +21,7 @@ export default function CustomizeLinks({
   setLinks: (links: Link[]) => void
 }) {
   const [errors, setErrors] = useState<{ [key: number]: string }>({})
+  const { userData } = useUserStore()
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event
@@ -45,11 +48,38 @@ export default function CustomizeLinks({
     return Object.keys(newErrors).length === 0
   }
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
+
     if (validateLinks() && links.length > 0) {
-      console.log('Form submitted successfully')
-      // supabase.from('links').insert(links)
+      const { data: existingLinks, error: existingLinksError } = await supabase
+        .from('links')
+        .select('*')
+        .eq('user', userData?.id)
+      if (existingLinksError) {
+        toast.error('Failed to check existing links')
+        return
+      }
+      if (existingLinks.length > 0) {
+        const { error: updateError } = await supabase
+          .from('links')
+          .update({ links })
+          .eq('user', userData?.id)
+        if (updateError) {
+          toast.error('Failed to update links')
+          return
+        }
+        toast.success('Links updated successfully')
+        return
+      }
+      const { error } = await supabase
+        .from('links')
+        .insert({ links, user: userData?.id, preview_url: makeid(6) })
+      if (error) {
+        toast.error('Failed to save links')
+      } else {
+        toast.success('Links saved successfully')
+      }
     }
   }
 

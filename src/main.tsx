@@ -63,7 +63,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/preview',
+        path: '/preview/:url',
         element: (
           <AuthProvider>
             <Suspense fallback={<div>Loading...</div>}>

@@ -7,9 +7,11 @@ import { Icon } from '@iconify/react'
 export default function Header({
   handleSection,
   activeSection,
+  url,
 }: {
   handleSection?: (section: string) => void
   activeSection?: string
+  url?: string
 }) {
   const location = useLocation()
   const [pathname, setPathname] = useState(location.pathname)
@@ -48,12 +50,21 @@ export default function Header({
 
       <div className="flex items-center gap-4">
         <Link
-          to={pathname === '/preview' ? '/dashboard' : '/preview'}
-          className="rounded-xl flex items-center gap-1 border border-solid border-primary py-2 px-5 text-xl font-semibold text-primary transition-all duration-300 hover:bg-primary-hover"
+          onClick={(e) => {
+            if (!url) {
+              e.preventDefault()
+            }
+          }}
+          to={pathname.includes('/preview/') ? '/dashboard' : `/preview/${url}`}
+          className={`rounded-xl flex items-center gap-1 border border-solid ${
+            url
+              ? 'border-primary text-primary hover:bg-primary-hover'
+              : 'border-gray-300 text-gray-300 cursor-not-allowed'
+          } py-2 px-5 text-xl font-semibold transition-all duration-300`}
         >
           <Icon icon="mdi:eye" />
           <span className="hidden md:block">
-            {pathname === '/preview' ? 'Back toEdit' : 'Preview'}
+            {pathname.includes('/preview/') ? 'Back to Edit' : 'Preview'}
           </span>
         </Link>
         <AuthButton />

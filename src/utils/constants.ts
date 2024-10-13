@@ -97,7 +97,7 @@ export function isValidUrl(platform: string, url: string): boolean {
     LinkedIn: /^https?:\/\/(www\.)?linkedin\.com\/(in|company)\/.+/i,
     Github: /^https?:\/\/(www\.)?github\.com\/.+/i,
     'Dev.to': /^https?:\/\/(www\.)?dev\.to\/.+/i,
-    FrontendMentor: /^https?:\/\/(www\.)?frontendmentor\.io\/profile\/.+/i,
+    'Frontend Mentor': /^https?:\/\/(www\.)?frontendmentor\.io\/profile\/.+/i,
     Gitlab: /^https?:\/\/(www\.)?gitlab\.com\/.+/i,
     Youtube: /^https?:\/\/(www\.)?youtube\.com\/@.+\/.+/i,
     Codepen: /^https?:\/\/(www\.)?codepen\.io\/.+/i,
