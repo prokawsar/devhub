@@ -104,7 +104,7 @@ export default function Signup() {
         </div>
         <Button
           className="py-5"
-          type="default"
+          type="primary"
           htmlType="submit"
           loading={isSubmitting}
         >
