@@ -27,7 +27,7 @@ export default function MobilePreview({
         ) : (
           <div className="rounded-full w-24 h-24 bg-gray-200 border-4 border-primary"></div>
         )}
-        <div className="flex flex-col gap-1 font-bold text-xl w-full items-center mb-10">
+        <div className="flex flex-col gap-3 font-bold text-2xl w-full items-center mb-10">
           {profileDetails.firstName || profileDetails.lastName ? (
             <div className="flex flex-row gap-1">
               <p>{profileDetails.firstName}</p>
