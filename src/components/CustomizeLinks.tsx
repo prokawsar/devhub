@@ -123,7 +123,7 @@ export default function CustomizeLinks({
             <EmptyList />
           )}
         </DndContext>
-        <div className="mt-10 flex items-center justify-end border-t pt-5">
+        <div className="mt-10 flex items-center justify-end border-t py-5">
           <button
             disabled={links.length === 0}
             className="bg-primary hover:bg-primary-hover hover:text-primary border border-primary text-white px-7 py-3 rounded-xl disabled:cursor-not-allowed disabled:bg-disabled-bg disabled:text-disabled-text"
