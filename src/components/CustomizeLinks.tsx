@@ -8,7 +8,8 @@ import EmptyList from './EmptyList'
 import LinkItem from './LinkItem'
 import { isValidUrl, socialPlatforms } from '@/utils/constants'
 import type { Link, SocialPlatform } from '@/utils/types'
-import { useState } from 'react'
+import { useState, FormEvent } from 'react'
+import { supabase } from '@/utils/supabase'
 
 export default function CustomizeLinks({
   links,
@@ -44,11 +45,11 @@ export default function CustomizeLinks({
     return Object.keys(newErrors).length === 0
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     if (validateLinks() && links.length > 0) {
-      // Proceed with form submission
       console.log('Form submitted successfully')
+      // supabase.from('links').insert(links)
     }
   }
 
