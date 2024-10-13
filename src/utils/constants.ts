@@ -88,3 +88,20 @@ export function isLightColor(color: string) {
   const brightness = (r * 299 + g * 587 + b * 114) / 1000
   return brightness > 128
 }
+
+export function isValidUrl(platform: string, url: string): boolean {
+  const patterns: { [key: string]: RegExp } = {
+    Facebook: /^https?:\/\/(www\.)?facebook\.com\/.+/i,
+    Twitter: /^https?:\/\/(www\.)?twitter\.com\/.+/i,
+    Instagram: /^https?:\/\/(www\.)?instagram\.com\/.+/i,
+    LinkedIn: /^https?:\/\/(www\.)?linkedin\.com\/(in|company)\/.+/i,
+    Github: /^https?:\/\/(www\.)?github\.com\/.+/i,
+    'Dev.to': /^https?:\/\/(www\.)?dev\.to\/.+/i,
+    FrontendMentor: /^https?:\/\/(www\.)?frontendmentor\.io\/profile\/.+/i,
+    Gitlab: /^https?:\/\/(www\.)?gitlab\.com\/.+/i,
+    Youtube: /^https?:\/\/(www\.)?youtube\.com\/@.+\/.+/i,
+    Codepen: /^https?:\/\/(www\.)?codepen\.io\/.+/i,
+    StackOverflow: /^https?:\/\/(www\.)?stackoverflow\.com\/users\/.+/i,
+  }
+  return patterns[platform].test(url)
+}

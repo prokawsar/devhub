@@ -6,19 +6,19 @@ import {
 } from '@dnd-kit/sortable'
 import EmptyList from './EmptyList'
 import LinkItem from './LinkItem'
-import { makeid, socialPlatforms } from '@/utils/constants'
-import { Button } from 'antd'
+import { isValidUrl, socialPlatforms } from '@/utils/constants'
 import type { Link, SocialPlatform } from '@/utils/types'
+import { useState } from 'react'
 
 export default function CustomizeLinks({
   links,
   setLinks,
-  setMobilePreviewLinks,
 }: {
   links: Link[]
   setLinks: (links: Link[]) => void
-  setMobilePreviewLinks: (links: Link[]) => void
 }) {
+  const [errors, setErrors] = useState<{ [key: number]: string }>({})
+
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event
 
@@ -28,7 +28,27 @@ export default function CustomizeLinks({
 
       const newLinks = arrayMove(links, oldIndex, newIndex)
       setLinks(newLinks)
-      setMobilePreviewLinks(newLinks) // Update mobile preview
+    }
+  }
+
+  function validateLinks() {
+    const newErrors: { [key: number]: string } = {}
+    links.forEach((link) => {
+      if (!link.link) {
+        newErrors[link.id] = 'URL cannot be empty'
+      } else if (!isValidUrl(link.platform.name, link.link)) {
+        newErrors[link.id] = `Invalid URL for ${link.platform.name}`
+      }
+    })
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    if (validateLinks()) {
+      // Proceed with form submission
+      console.log('Form submitted successfully')
     }
   }
 
@@ -52,56 +72,65 @@ export default function CustomizeLinks({
       >
         <span>Add link</span>
       </button>
-
-      <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
-        {links.length > 0 ? (
-          <SortableContext items={links} strategy={verticalListSortingStrategy}>
-            <div className="flex flex-col overflow-y-auto h-[600px]">
-              {links.map((link) => (
-                <LinkItem
-                  key={link.id}
-                  link={link}
-                  handleRemoveLink={() => {
-                    const newLinks = links.filter((l) => l.id !== link.id)
-                    setLinks(newLinks)
-                    setMobilePreviewLinks(newLinks) // Update mobile preview
-                  }}
-                  handleUpdateLink={({
-                    platform,
-                    url,
-                  }: {
-                    platform?: SocialPlatform
-                    url?: string
-                  }) => {
-                    setLinks(
-                      links.map((l) => {
-                        if (l.id === link.id) {
-                          return {
-                            ...l,
-                            platform: platform || l.platform,
-                            link: url || l.link,
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col bg-white p-10 pb-0 w-full h-full"
+      >
+        <DndContext
+          collisionDetection={closestCorners}
+          onDragEnd={handleDragEnd}
+        >
+          {links.length > 0 ? (
+            <SortableContext
+              items={links}
+              strategy={verticalListSortingStrategy}
+            >
+              <div className="flex flex-col overflow-y-auto h-[600px]">
+                {links.map((link) => (
+                  <LinkItem
+                    key={link.id}
+                    link={link}
+                    errors={errors}
+                    handleRemoveLink={() => {
+                      const newLinks = links.filter((l) => l.id !== link.id)
+                      setLinks(newLinks)
+                    }}
+                    handleUpdateLink={({
+                      platform,
+                      url,
+                    }: {
+                      platform?: SocialPlatform
+                      url?: string
+                    }) => {
+                      setLinks(
+                        links.map((l) => {
+                          if (l.id === link.id) {
+                            return {
+                              ...l,
+                              platform: platform || l.platform,
+                              link: url || l.link,
+                            }
                           }
-                        }
-                        return l
-                      }),
-                    )
-                    setMobilePreviewLinks(links) // Update mobile preview
-                  }}
-                />
-              ))}
-            </div>
-          </SortableContext>
-        ) : (
-          <EmptyList />
+                          return l
+                        }),
+                      )
+                    }}
+                  />
+                ))}
+              </div>
+            </SortableContext>
+          ) : (
+            <EmptyList />
+          )}
+        </DndContext>
+        {links.length > 0 && (
+          <div className="mt-10 flex items-center justify-end">
+            <button className="bg-primary hover:bg-primary-hover hover:text-primary border border-primary text-white px-7 py-3 rounded-xl">
+              Save
+            </button>
+          </div>
         )}
-      </DndContext>
-      {links.length > 0 && (
-        <div className="mt-10 flex items-center justify-end">
-          <button className="bg-primary hover:bg-primary-hover hover:text-primary border border-primary text-white px-7 py-3 rounded-xl">
-            Save
-          </button>
-        </div>
-      )}
+      </form>
     </div>
   )
 }

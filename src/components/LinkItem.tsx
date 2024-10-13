@@ -9,9 +9,11 @@ export default function LinkItem({
   link,
   handleRemoveLink,
   handleUpdateLink,
+  errors,
 }: {
   link: Link
   handleRemoveLink: () => void
+  errors: { [key: number]: string }
   handleUpdateLink: ({
     platform,
     url,
@@ -105,7 +107,7 @@ export default function LinkItem({
           <label htmlFor="link" className="text-gray-800">
             Link
           </label>
-          <div className="relative flex">
+          <div className="relative flex flex-col">
             <input
               type="text"
               placeholder="e.g. https://www.github.com/"
@@ -115,6 +117,9 @@ export default function LinkItem({
               onBlur={() => handleUpdateLink({ url: linkUrl })}
               className="w-full rounded-lg border py-2 px-4 border-solid border-gray-300 bg-white text-gray-800 caret-primary outline-none focus:border-primary focus:shadow-purple-sh disabled:cursor-not-allowed disabled:bg-disabled-bg"
             />
+            {errors && errors[link.id] && (
+              <p className="text-red-500 text-sm">{errors[link.id]}</p>
+            )}
           </div>
         </div>
       </div>
