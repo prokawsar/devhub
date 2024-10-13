@@ -18,7 +18,9 @@ export default function AuthButton() {
     return (
       <div className="flex text-gray-500 flex-row hover:text-primary items-center gap-2">
         <Icon icon="websymbol:logout" />
-        <button onClick={signOut}>Sign out</button>
+        <button className="hidden md:block" onClick={signOut}>
+          Sign out
+        </button>
       </div>
     )
   }

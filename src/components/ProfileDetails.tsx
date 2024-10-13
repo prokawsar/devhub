@@ -48,10 +48,10 @@ export default function ProfileDetails({
 
       <form
         onSubmit={handleSubmit(onSubmitData)}
-        className="flex flex-col gap-5 mt-10 justify-between h-[88%]"
+        className="flex flex-col gap-5 mt-10 justify-between md:h-[88%]"
       >
         <div className="flex flex-col gap-5">
-          <div className="flex-row bg-gray-50 flex w-full h-40 rounded-lg items-center justify-between gap-2 p-5">
+          <div className="flex-col md:flex-row bg-gray-50 flex w-full md:h-40 rounded-lg items-center justify-between gap-2 p-5">
             <span className="text-xl text-gray-500">Profile picture</span>
             <input
               type="file"
@@ -61,7 +61,7 @@ export default function ProfileDetails({
               accept="image/jpg, image/png"
               onChange={handlePhotoChange}
             />
-            <div className="flex-row flex items-center gap-5">
+            <div className="flex-col md:flex-row flex items-center gap-5">
               <label
                 style={
                   profileDetails.photo
@@ -81,7 +81,7 @@ export default function ProfileDetails({
                   <span className="text-xl font-semibold">+ Upload Image</span>
                 )}
               </label>
-              <p className="w-36 text-gray-500">
+              <p className="md:w-36 text-sm md:text-base text-gray-500">
                 Image must be below 1024x1024px. Use PNG or JPG format.
               </p>
             </div>

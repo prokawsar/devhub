@@ -16,8 +16,8 @@ export default function Input({
   ...rest
 }: InputProps) {
   return (
-    <div className="flex-row flex items-center gap-5">
-      <label htmlFor={id} className="w-[24rem] text-gray-500">
+    <div className="flex-col md:flex-row flex md:items-center gap-5">
+      <label htmlFor={id} className="md:w-[24rem] text-gray-500">
         {label}
         {rest.required && '*'}
       </label>

@@ -82,7 +82,7 @@ export default function CustomizeLinks({
               items={links}
               strategy={verticalListSortingStrategy}
             >
-              <div className="flex flex-col overflow-y-auto h-[600px]">
+              <div className="flex flex-col overflow-y-auto h-full md:h-[600px]">
                 {links.map((link) => (
                   <LinkItem
                     key={link.id}
@@ -126,7 +126,7 @@ export default function CustomizeLinks({
         <div className="mt-10 flex items-center justify-end border-t py-5">
           <button
             disabled={links.length === 0}
-            className="bg-primary hover:bg-primary-hover hover:text-primary border border-primary text-white px-7 py-3 rounded-xl disabled:cursor-not-allowed disabled:bg-disabled-bg disabled:text-disabled-text"
+            className="bg-primary w-full md:w-auto hover:bg-primary-hover hover:text-primary border border-primary text-white px-7 py-3 rounded-xl disabled:cursor-not-allowed disabled:bg-disabled-bg disabled:text-disabled-text"
           >
             Save
           </button>
