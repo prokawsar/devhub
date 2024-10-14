@@ -1,4 +1,3 @@
-import { useUserStore } from '@/store'
 import {
   FieldErrors,
   UseFormHandleSubmit,
@@ -102,7 +101,7 @@ export default function ProfileDetails({
             <Input
               id="lastName"
               label="Last name"
-              placeholder="e.g. Appleseed"
+              placeholder="e.g. Doe"
               register={register}
               error={errors.lastName}
               disabled={isUpdating}

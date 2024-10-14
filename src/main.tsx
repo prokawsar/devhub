@@ -1,11 +1,11 @@
 import ReactDOM from 'react-dom/client'
 import { StrictMode, Suspense, lazy } from 'react'
 import './index.css'
-import App from './App'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import AuthProvider from './components/context/AuthProvider'
 import { Layout } from './pages/layout'
 import Error from './pages/error'
+import Loader from './components/Loader'
 
 const Signup = lazy(() => import('./pages/signup'))
 const Login = lazy(() => import('./pages/login'))
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
         path: 'login',
         element: (
           <AuthProvider>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loader />}>
               <Login />
             </Suspense>
           </AuthProvider>
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
         path: 'signup',
         element: (
           <AuthProvider>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loader />}>
               <Signup />
             </Suspense>
           </AuthProvider>
@@ -49,7 +49,7 @@ const router = createBrowserRouter([
         path: '/',
         element: (
           <AuthProvider>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loader />}>
               <Dashboard />
             </Suspense>
           </AuthProvider>
@@ -59,7 +59,7 @@ const router = createBrowserRouter([
         path: '/preview/:url',
         element: (
           <AuthProvider>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loader />}>
               <Preview />
             </Suspense>
           </AuthProvider>

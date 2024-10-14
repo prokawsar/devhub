@@ -23,6 +23,8 @@ export default function Header({
     setPathname(location.pathname)
   }, [location.pathname])
 
+  const isPreviewPage = pathname.startsWith('/preview')
+
   return (
     <header className="relative flex items-center rounded-lg w-full justify-between bg-white px-2 py-2">
       <Link to="/" className="text-center text-[26px] font-bold tracking-wide">
@@ -59,7 +61,7 @@ export default function Header({
                 e.preventDefault()
               }
             }}
-            to={pathname.startsWith('/preview/') ? '/' : `/preview/${url}`}
+            to={isPreviewPage ? '/' : `/preview/${url}`}
             className={`rounded-xl flex items-center gap-1 border border-solid ${
               url || userData
                 ? 'border-primary text-primary hover:bg-primary-hover'
@@ -67,14 +69,14 @@ export default function Header({
             } py-2 px-5 text-xl font-semibold transition-all duration-300`}
           >
             <Icon
-              icon={pathname.startsWith('/preview') ? 'mdi:pencil' : 'mdi:eye'}
+              icon={isPreviewPage ? 'mdi:pencil' : 'mdi:eye'}
               className="text-xl"
             />
             <span className="hidden md:block">
-              {pathname.startsWith('/preview') ? 'Back to Edit' : 'Preview'}
+              {isPreviewPage ? 'Back to Edit' : 'Preview'}
             </span>
           </Link>
-          {pathname.startsWith('/preview') && (
+          {isPreviewPage && (
             <Button
               onClick={() => {
                 navigator.clipboard.writeText(window.location.href)
