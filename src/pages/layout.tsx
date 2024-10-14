@@ -31,7 +31,6 @@ export function Layout() {
       </div>
       <Toaster
         toastOptions={{
-          className: 'py-2.5 mb-7',
           closeButton: true,
         }}
         position="bottom-center"
