@@ -31,6 +31,7 @@ export function Layout() {
       </div>
       <Toaster
         toastOptions={{
+          className: 'mb-12',
           closeButton: true,
         }}
         position="bottom-center"

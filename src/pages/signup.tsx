@@ -33,7 +33,7 @@ export default function Signup() {
       toast.error(error.message)
       return
     }
-    navigate('/dashboard')
+    navigate('/')
   }
   document.title = 'Signup'
 

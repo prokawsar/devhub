@@ -1,6 +1,6 @@
 import type { SocialPlatform } from './types'
 
-export const PROTECTED_ROUTES = ['/', '/dashboard']
+export const PROTECTED_ROUTES = ['/']
 export const PUBLIC_ROUTES = ['/login', '/signup']
 
 export const socialPlatforms: SocialPlatform[] = [
