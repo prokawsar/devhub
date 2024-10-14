@@ -1,12 +1,8 @@
 import { Toaster } from 'sonner'
-import { Link, Outlet, useLocation } from 'react-router-dom'
-import AuthButton from '@/components/AuthButton'
-import { useContext } from 'react'
-import { AuthContext } from '@/components/context/AuthProvider'
+import { Outlet, useLocation } from 'react-router-dom'
 import { ConfigProvider } from 'antd'
 
 export function Layout() {
-  const { userData } = useContext(AuthContext)
   const location = useLocation()
 
   const fullHeightRoutes = ['/', '/login', '/signup']
@@ -17,17 +13,6 @@ export function Layout() {
       className={`flex flex-col justify-between ${isFullHeight ? 'h-screen' : ''}`}
     >
       <div className="flex flex-col h-full items-center bg-gray-50">
-        {!userData && (
-          <nav className="max-w-6xl border-b py-2 mx-auto w-full gap-2 flex flex-row justify-between">
-            <Link
-              to="/"
-              className="text-center text-[26px] font-bold tracking-wide"
-            >
-              DevHub
-            </Link>
-            <AuthButton />
-          </nav>
-        )}
         <ConfigProvider
           theme={{
             components: {

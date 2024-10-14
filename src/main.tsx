@@ -25,14 +25,6 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       {
-        index: true,
-        element: (
-          <AuthProvider>
-            <App />
-          </AuthProvider>
-        ),
-      },
-      {
         path: 'login',
         element: (
           <AuthProvider>
@@ -53,7 +45,8 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/dashboard',
+        index: true,
+        path: '/',
         element: (
           <AuthProvider>
             <Suspense fallback={<div>Loading...</div>}>

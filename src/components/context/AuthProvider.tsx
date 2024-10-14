@@ -30,7 +30,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
       })
     } else {
       if (PUBLIC_ROUTES.includes(location.pathname)) {
-        navigate('/dashboard')
+        navigate('/')
       }
     }
   }, [navigate, location, userData, setUser])

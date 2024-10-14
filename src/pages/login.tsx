@@ -36,7 +36,7 @@ export default function Login() {
 
       setUser(user)
       toast.success('Login in successful')
-      navigate('/dashboard')
+      navigate('/')
     } else {
       toast.error(error.message)
     }
