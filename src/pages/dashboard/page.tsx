@@ -107,7 +107,11 @@ export default function Dashboard() {
       />
       <div className="flex flex-row gap-4 h-full w-full">
         <div className="flex-col hidden md:flex gap-4 bg-white rounded-lg p-4 w-2/6">
-          <MobilePreview links={links} profileDetails={profileDetails} />
+          <MobilePreview
+            preview={activeSection === 'links'}
+            links={links}
+            profileDetails={profileDetails}
+          />
         </div>
         <div className="flex flex-col gap-4 bg-white rounded-lg w-full md:w-4/6">
           {activeSection === 'links' ? (

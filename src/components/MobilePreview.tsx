@@ -7,9 +7,11 @@ import { Icon } from '@iconify/react'
 export default function MobilePreview({
   links,
   profileDetails,
+  preview,
 }: {
   links: Link[]
   profileDetails: ProfileData
+  preview?: boolean
 }) {
   const displayLinks = Array(5)
     .fill(null)
@@ -47,6 +49,7 @@ export default function MobilePreview({
           >
             {link ? (
               <RouterLink
+                target="_blank"
                 className="rounded-lg px-4 py-3 w-full flex items-center justify-between hover:bg-opacity-50  cursor-pointer"
                 to={link.link}
                 style={{
@@ -60,8 +63,10 @@ export default function MobilePreview({
                 </span>
                 <Icon icon="material-symbols:arrow-forward-rounded" />
               </RouterLink>
-            ) : (
+            ) : preview ? (
               <div className="rounded-lg p-6 w-full flex items-center justify-between bg-gray-200 text-gray-400"></div>
+            ) : (
+              ''
             )}
           </div>
         ))}

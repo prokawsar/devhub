@@ -23,7 +23,7 @@ export default function Header({
     setPathname(location.pathname)
   }, [location.pathname])
 
-  const isPreviewPage = pathname.startsWith('/preview')
+  const isPreviewPage = pathname.startsWith('/profile')
 
   return (
     <header className="relative flex items-center rounded-lg w-full justify-between bg-white px-2 py-2">
@@ -61,7 +61,7 @@ export default function Header({
                 e.preventDefault()
               }
             }}
-            to={isPreviewPage ? '/' : `/preview/${url}`}
+            to={isPreviewPage ? '/' : `/profile/${url}`}
             className={`rounded-xl flex items-center gap-1 border border-solid ${
               url || userData
                 ? 'border-primary text-primary hover:bg-primary-hover'

@@ -10,7 +10,7 @@ import Loader from './components/Loader'
 const Signup = lazy(() => import('./pages/signup'))
 const Login = lazy(() => import('./pages/login'))
 const Dashboard = lazy(() => import('./pages/dashboard/page'))
-const Preview = lazy(() => import('./pages/preview/page'))
+const Preview = lazy(() => import('./pages/profile/page'))
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
@@ -56,7 +56,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/preview/:url',
+        path: '/profile/:url',
         element: (
           <AuthProvider>
             <Suspense fallback={<Loader />}>
