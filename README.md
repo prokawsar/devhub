@@ -1,50 +1,55 @@
-# React + TypeScript + Vite
+# DevLinks
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a DevLinks built with React, and Supabase. It allows users to create a personalized page with multiple links and share it with others.
 
-Currently, two official plugins are available:
+## Prerequisites
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Before you begin, ensure you have met the following requirements:
 
-## Expanding the ESLint configuration
+- You have installed the latest version of [Node.js and npm](https://nodejs.org/en/download/)
+- You have a Windows/Linux/Mac machine.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Installing DevLinks
 
-- Configure the top-level `parserOptions` property like this:
+To install the DevLinks, follow these steps:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+1. Clone the repository
+   ```
+   git clone https://github.com/prokawsar/devhub.git
+   ```
+2. Navigate to the project directory
+   ```
+   cd devhub
+   ```
+3. Install the dependencies
+   ```
+   npm install
+   ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Using DevLinks
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+To use DevLinks, follow these steps:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. Start the development server
+   ```
+   npm run dev
+   ```
+2. Open your browser and visit `http://localhost:3000`
+
+The project is now running locally on your machine!
+
+## Features
+
+- User authentication
+- Create and manage multiple links
+- Customize profile information
+- Preview your DevLinks page
+- Responsive design for mobile and desktop
+
+## Environment Variables
+
+This project includes a `.env` file in the source code, so you don't need to configure any environment variables manually. All necessary keys and configurations are pre-set.
+
+## Contact
+
+If you want to contact me, you can reach me at `prokawsar@gmail.com`.
