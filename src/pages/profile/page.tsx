@@ -24,8 +24,8 @@ export default function Preview() {
       .eq('preview_url', url)
     setLinks(data?.[0]?.links || [])
     setProfileDetails({
-      firstName: data?.[0]?.full_name?.split(' ')[0] || '',
-      lastName: data?.[0]?.full_name?.split(' ')[1] || '',
+      firstName: data?.[0]?.first_name || '',
+      lastName: data?.[0]?.last_name || '',
       email: data?.[0]?.email || '',
     })
     setIsLoading(false)

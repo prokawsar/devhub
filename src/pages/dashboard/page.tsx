@@ -6,7 +6,13 @@ import { useForm } from 'react-hook-form'
 import { Link, ProfileData } from '@/utils/types'
 import MobilePreview from '@/components/MobilePreview'
 import { useUserStore } from '@/store'
-import { supabase } from '@/utils/supabase'
+import {
+  checkExistingLinks,
+  insertProfileData,
+  supabase,
+  updateProfileData,
+} from '@/utils/supabase'
+import { toast } from 'sonner'
 
 export default function Dashboard() {
   const [activeSection, setActiveSection] = useState('links')
@@ -29,7 +35,7 @@ export default function Dashboard() {
   const handleSection = (section: string) => {
     setActiveSection(section)
   }
-  const getLinks = useCallback(async () => {
+  const getLinks = async () => {
     if (userData?.id) {
       const { data: links, error } = await supabase
         .from('links')
@@ -43,49 +49,44 @@ export default function Dashboard() {
       previewUrl.current = links?.[0]?.preview_url
       setProfileDetails((prevDetails) => ({
         ...prevDetails,
-        firstName: links?.[0]?.full_name?.split(' ')[0] || '',
-        lastName: links?.[0]?.full_name?.split(' ')[1] || '',
+        firstName: links?.[0]?.first_name || '',
+        lastName: links?.[0]?.last_name || '',
       }))
     }
-  }, [userData?.id])
+  }
 
   useEffect(() => {
-    if (userData?.id) {
-      getLinks()
-    }
-  }, [userData?.id, getLinks])
+    getLinks()
+  }, [])
 
   const handleSubmitData = async (data: ProfileData) => {
     if (data.firstName || data.lastName) {
-      const full_name = `${data.firstName} ${data.lastName}`
-
-      const { data: existingData, error: fetchError } = await supabase
-        .from('links')
-        .select('id')
-        .eq('user', userData?.id)
-        .single()
+      const { data: existingData, error: fetchError } =
+        await checkExistingLinks(userData?.id as string)
 
       if (fetchError && fetchError.code !== 'PGRST116') {
-        console.error('Error checking existing record:', fetchError)
+        toast.error('Error checking existing record')
         return
       }
-
+      console.log(existingData)
       let result
-      if (existingData) {
-        result = await supabase
-          .from('links')
-          .update({ full_name, email: userData?.email })
-          .eq('user', userData?.id)
-      } else {
-        // Insert new record
-        result = await supabase
-          .from('links')
-          .insert({ full_name, user: userData?.id, email: userData?.email })
-      }
 
-      const { data: linksData, error: linksError } = result
-      if (linksError) {
-        console.error(linksError)
+      if (existingData) {
+        result = await updateProfileData(userData?.id as string, {
+          first_name: data.firstName,
+          last_name: data.lastName,
+          email: userData?.email,
+        })
+        if (!result.error) {
+          toast.success('Profile updated successfully')
+        }
+      } else {
+        result = insertProfileData(userData?.id as string, {
+          first_name: data.firstName,
+          last_name: data.lastName,
+          email: userData?.email,
+        })
+        toast.success('Profile updated successfully')
       }
     }
   }
