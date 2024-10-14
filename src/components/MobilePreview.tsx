@@ -31,9 +31,10 @@ export default function MobilePreview({
         )}
         <div className="flex flex-col gap-3 font-bold text-2xl w-full items-center mb-10">
           {profileDetails.firstName || profileDetails.lastName ? (
-            <div className="flex flex-row gap-1">
-              <p>{profileDetails.firstName}</p>
-              <p>{profileDetails.lastName}</p>
+            <div className="flex flex-row gap-1 text-center">
+              <p>
+                {profileDetails.firstName} {profileDetails.lastName}
+              </p>
             </div>
           ) : (
             <div className="w-24 h-8 bg-gray-300"></div>
